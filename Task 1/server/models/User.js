@@ -12,6 +12,10 @@ class User {
     const usersData = fs.readFileSync(usersPath, 'utf8')
     return JSON.parse(usersData)
   }
+  static getUserById(id) {
+    const users = User.getAllUsers()
+    return users.find((user) => user.id === id)
+  }
 }
 
 export default User
