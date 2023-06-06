@@ -40,7 +40,7 @@ function mapAsyncFunction<T, U>(
 }
 
 /*** Test ***/
-let start = Date.now() // Create date to see how long does it take to finish the execution
+const start = Date.now() // Create date to see how long does it take to finish the execution
 
 const asyncFn = async(value: number) => { // Simulation async function for parameter
   //console.log(`Execution #${value} proceeding..`)
