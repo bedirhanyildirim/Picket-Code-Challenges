@@ -3,10 +3,11 @@ import path from 'path'
 import { v4 as uuid } from 'uuid'
 import { fileURLToPath } from 'url'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-
-const usersPath = path.join(__dirname, '..', '..', 'data', 'users.json')
+const getFilePath = () => {
+  const filename = fileURLToPath(import.meta.url)
+  const dirname = path.dirname(filename)
+  return path.join(dirname, '..', '..', 'data', 'users.json')
+}
 
 export default class User {
 
@@ -19,7 +20,7 @@ export default class User {
   }
 
   static getAllUsers() {
-    const usersData = fs.readFileSync(usersPath, 'utf8')
+    const usersData = fs.readFileSync(getFilePath(), 'utf8')
     return JSON.parse(usersData)
   }
 
@@ -76,7 +77,7 @@ export default class User {
     )
 
     users.push(newUser)
-    fs.writeFileSync(usersPath, JSON.stringify(users, null, 2))
+    fs.writeFileSync(getFilePath(), JSON.stringify(users, null, 2))
     return newUser
   }
 
@@ -115,7 +116,7 @@ export default class User {
     )
 
     users[userIndex] = updatedUserData;
-    fs.writeFileSync(usersPath, JSON.stringify(users, null, 2))
+    fs.writeFileSync(getFilePath(), JSON.stringify(users, null, 2))
     return updatedUserData
   }
 
@@ -127,7 +128,7 @@ export default class User {
     }
 
     const deletedUser = users.splice(userIndex, 1)[0];
-    fs.writeFileSync(usersPath, JSON.stringify(users, null, 2));
+    fs.writeFileSync(getFilePath(), JSON.stringify(users, null, 2));
     return deletedUser;
   }
 
