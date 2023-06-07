@@ -3,7 +3,7 @@ import path from 'path'
 import { v4 as uuid } from 'uuid'
 import { fileURLToPath } from 'url'
 
-const getFilePath = () => {
+export const getFilePath = () => {
   const filename = fileURLToPath(import.meta.url)
   const dirname = path.dirname(filename)
   return path.join(dirname, '..', '..', 'data', 'users.json')

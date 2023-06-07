@@ -1,5 +1,5 @@
 const config = {
-  testEnvironment: 'jest-environment-node',
+  testEnvironment: 'node',
   testMatch: ['**/*.test.js'],
   transform: {
     '^.+\\.js$': 'babel-jest',
