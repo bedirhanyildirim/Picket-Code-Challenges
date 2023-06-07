@@ -67,6 +67,45 @@ class User {
     fs.writeFileSync(usersPath, JSON.stringify(users, null, 2))
     return newUser
   }
+
+  static updateUser(id, updatedUser) {
+    const users = User.getAllUsers()
+    const userIndex = users.findIndex((user) => user.id === id)
+    if (userIndex === -1) {
+      throw new Error('User not found')
+    }
+  
+    const existingUser = users[userIndex]
+  
+    // Check for unique email (excluding the current user)
+    const isEmailTaken = users.some(
+      (existingUser) => existingUser.email === updatedUser.email && existingUser.id !== id
+    )
+    if (isEmailTaken) {
+      throw new Error('Email already exists')
+    }
+  
+    // Check for unique phone (excluding the current user)
+    const isPhoneTaken = users.some(
+      (existingUser) => existingUser.phone === updatedUser.phone && existingUser.id !== id
+    )
+    if (isPhoneTaken) {
+      throw new Error('Phone already exists')
+    }
+  
+    // Concatenate existing user data with updated fields
+    const updatedUserData = {
+        id: existingUser.id,
+        firstName: updatedUser.firstName || existingUser.firstName,
+        lastName: updatedUser.lastName || existingUser.lastName,
+        email: updatedUser.email || existingUser.email,
+        phone: updatedUser.phone || existingUser.phone,
+      }
+  
+    users[userIndex] = updatedUserData;
+    fs.writeFileSync(usersPath, JSON.stringify(users, null, 2))
+    return updatedUserData
+  }
 }
 
 export default User

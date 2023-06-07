@@ -14,6 +14,12 @@ const userController = {
     const newUser = User.createUser({ firstName, lastName, email, phone })
     res.json(newUser)
   },
+  updateUser(req, res) {
+    const { id } = req.params
+    const { firstName, lastName, email, phone } = req.body
+    const updatedUser = User.updateUser(id, { firstName, lastName, email, phone })
+    res.json(updatedUser)
+  },
 }
 
 export default userController
