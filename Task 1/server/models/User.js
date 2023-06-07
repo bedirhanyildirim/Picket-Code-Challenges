@@ -130,4 +130,20 @@ export default class User {
     fs.writeFileSync(usersPath, JSON.stringify(users, null, 2));
     return deletedUser;
   }
+
+  static searchUsers({ firstName, lastName, email, phone }) {
+    const users = User.getAllUsers()
+    const result = users.filter((user) => {
+      const isFirstNameMatched = firstName ? user.firstName.toLowerCase().includes(firstName.toLowerCase()) : true
+      const isLastNameMatched = lastName ? user.lastName.toLowerCase().includes(lastName.toLowerCase()) : true
+      const isEmailMatched = email ? user.email.toLowerCase().includes(email.toLowerCase()) : true
+      const isPhoneMatched = phone ? user.phone.toLowerCase().includes(phone.toLowerCase()) : true
+
+      return isFirstNameMatched && isLastNameMatched && isEmailMatched && isPhoneMatched
+    })
+    if (result.length > 0) {
+      return result
+    }
+    throw new Error('User not found')
+  }
 }

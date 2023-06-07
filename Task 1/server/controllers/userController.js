@@ -44,3 +44,13 @@ export const deleteUser = (req, res) => {
     res.status(400).json({ message: error.message })
   }
 }
+
+export const searchUsers = (req, res) => {
+  const { firstName, lastName, email, phone } = req.query
+  try {
+    const users = User.searchUsers({ firstName, lastName, email, phone })
+    res.json(users)
+  } catch (error) {
+    res.status(400).json({ message: error.message })
+  }
+};

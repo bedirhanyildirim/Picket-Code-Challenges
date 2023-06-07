@@ -4,7 +4,8 @@ import {
   getUserById, 
   createUser, 
   updateUser, 
-  deleteUser
+  deleteUser,
+  searchUsers
 } from '../controllers/userController.js'
 
 const userRoutes = express.Router()
@@ -12,8 +13,11 @@ const userRoutes = express.Router()
 // Route: GET /users
 userRoutes.get('/', getUsers)
 
-// Route: GET /users/:id
-userRoutes.get('/:id', getUserById)
+// Route: GET /users/byId/:id
+userRoutes.get('/byId/:id', getUserById)
+
+// Route: GET /users/search
+userRoutes.get('/search', searchUsers)
 
 // Route: POST /users
 userRoutes.post('/', createUser)
