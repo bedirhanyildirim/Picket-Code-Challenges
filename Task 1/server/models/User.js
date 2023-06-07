@@ -8,7 +8,15 @@ const __dirname = path.dirname(__filename)
 
 const usersPath = path.join(__dirname, '..', '..', 'data', 'users.json')
 
-class User {
+export default class User {
+
+  constructor(id, firstName, lastName, email, phone) {
+    this.id = id
+    this.firstName = firstName
+    this.lastName = lastName
+    this.email = email
+    this.phone = phone
+  }
 
   static getAllUsers() {
     const usersData = fs.readFileSync(usersPath, 'utf8')
@@ -59,13 +67,13 @@ class User {
       throw new Error('Phone is required')
     }
 
-    const newUser = {
-      id: uuid(),
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      phone: user.phone,
-    }
+    const newUser = new User(
+      uuid(),
+      user.firstName,
+      user.lastName,
+      user.email,
+      user.phone
+    )
 
     users.push(newUser)
     fs.writeFileSync(usersPath, JSON.stringify(users, null, 2))
@@ -98,13 +106,13 @@ class User {
     }
 
     // Concatenate existing user data with updated fields
-    const updatedUserData = {
-      id: existingUser.id,
-      firstName: updatedUser.firstName || existingUser.firstName,
-      lastName: updatedUser.lastName || existingUser.lastName,
-      email: updatedUser.email || existingUser.email,
-      phone: updatedUser.phone || existingUser.phone,
-    }
+    const updatedUserData = new User(
+      existingUser.id,
+      updatedUser.firstName || existingUser.firstName,
+      updatedUser.lastName || existingUser.lastName,
+      updatedUser.email || existingUser.email,
+      updatedUser.phone || existingUser.phone,
+    )
 
     users[userIndex] = updatedUserData;
     fs.writeFileSync(usersPath, JSON.stringify(users, null, 2))
@@ -123,5 +131,3 @@ class User {
     return deletedUser;
   }
 }
-
-export default User
