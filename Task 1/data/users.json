@@ -1,7 +1,9 @@
 [
-    {
-        "id": "1",
-        "name": "Bedirhan",
-        "surname": "Yildirim"
-    }
+  {
+    "id": "1",
+    "name": "Bedirhan",
+    "surname": "Yildirim",
+    "email": "bedirhanyildirim96@gmail.com",
+    "phone": "123456789"
+  }
 ]
