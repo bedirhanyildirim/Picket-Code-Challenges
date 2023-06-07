@@ -20,6 +20,11 @@ const userController = {
     const updatedUser = User.updateUser(id, { firstName, lastName, email, phone })
     res.json(updatedUser)
   },
+  deleteUser(req, res) {
+    const { id } = req.params
+    const deletedUser = User.deleteUser(id)
+    res.json(deletedUser)
+  }
 }
 
 export default userController

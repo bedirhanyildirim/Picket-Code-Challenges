@@ -17,7 +17,11 @@ class User {
 
   static getUserById(id) {
     const users = User.getAllUsers()
-    return users.find((user) => user.id === id)
+    const user = users.find((user) => user.id === id)
+    if (user) {
+      return user
+    }
+    throw new Error('User not found')
   }
 
   static createUser(user) {
