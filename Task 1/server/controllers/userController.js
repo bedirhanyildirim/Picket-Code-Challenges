@@ -6,7 +6,7 @@ const userController = {
     res.json(users)
   },
   getUser(req, res) {
-    const user = User.getUserById(req.params.userId)
+    const user = User.getUserById(req.params.id)
     res.json(user)
   },
   createUser(req, res) {
